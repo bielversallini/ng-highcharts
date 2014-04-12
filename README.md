@@ -8,7 +8,7 @@ How to use
 
 **1) Adding the library:**
 	
-	<script src="ngHighcharts.min.js"></script>
+	<script src="ng-highcharts.min.js"></script>
 	
 **2) Injecting in your app:**
 	
