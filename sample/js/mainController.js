@@ -4,16 +4,68 @@ app.controller('mainController', function($scope) {
     var data = function() {
         return [{
             name: 'Netflix',
-            data: [7.0, 6.9, 9.5, 14.5]
+            period: 'JAN',
+            value: 48
         }, {
             name: 'Popcorn Time',
-            data: [0.8, 5.7, 11.3, 17.0]
+            period: 'JAN',
+            value: 20
         }, {
             name: 'HBO',
-            data: [0.6, 3.5, 8.4, 13.5, 17.0]
+            period: 'JAN',
+            value: 80
         }, {
             name: 'Telecine',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9]
+            period: 'JAN',
+            value: 78
+        }, {
+            name: 'Netflix',
+            period: 'FEV',
+            value: 38
+        }, {
+            name: 'Popcorn Time',
+            period: 'FEV',
+            value: 48
+        }, {
+            name: 'HBO',
+            period: 'FEV',
+            value: 50
+        }, {
+            name: 'Telecine',
+            period: 'FEV',
+            value: 48
+        }, {
+            name: 'Netflix',
+            period: 'MAR',
+            value: 57
+        }, {
+            name: 'Popcorn Time',
+            period: 'MAR',
+            value: 69
+        }, {
+            name: 'HBO',
+            period: 'MAR',
+            value: 50
+        }, {
+            name: 'Telecine',
+            period: 'MAR',
+            value: 48
+        }, {
+            name: 'Netflix',
+            period: 'ABR',
+            value: 78
+        }, {
+            name: 'Popcorn Time',
+            period: 'ABR',
+            value: 76
+        }, {
+            name: 'HBO',
+            period: 'ABR',
+            value: 58
+        }, {
+            name: 'Telecine',
+            period: 'ABR',
+            value: 48
         }];
     }
     $scope.arr = new data();

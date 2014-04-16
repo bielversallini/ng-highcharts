@@ -1,4 +1,4 @@
-## ng-highcharts [![Build Status](https://travis-ci.org/bielversallini/ng-highcharts.svg)](https://travis-ci.org/bielversallini/ng-highcharts)
+## ng-highcharts [![Build Status](https://travis-ci.org/bielversallini/ng-highcharts.svg?branch=master)](https://travis-ci.org/bielversallini/ng-highcharts)
 Angular directive for Highcharts
 
 > **WORK IN PROGRESS!** 
@@ -21,7 +21,9 @@ How to use
                title="Movie Audience Measurement"
                subtitle="Source: PirateBay"
                y-title="Quantitative (MM)"
-               categories="['Jan', 'Feb', 'Mar', 'Apr', 'May']">
+               y-Field="value"
+               display-name="name"
+               category-field="period">
     </highchart>
     
 Only types column, bar, line, area and scatter are available.

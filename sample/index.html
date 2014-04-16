@@ -13,7 +13,7 @@
 <body ng-controller="mainController">
 <div class="container">
     <div class="row">
-        <h1>ng-highcharts</h1>
+        <h1>ngHighcharts</h1>
         <p>This is a sample page for the ngHighcharts.</p>
     </div>
     <div class="row">
@@ -22,7 +22,9 @@
                        title="Movie Audience Measurement"
                        subtitle="Source: PirateBay"
                        y-title="Quantitative (MM)"
-                       categories="['Jan', 'Feb', 'Mar', 'Apr', 'May']">
+                       y-Field="value"
+                       display-name="name"
+                       category-field="period">
             </highchart>
         </div>
         <div class="col-md-12">
@@ -30,7 +32,9 @@
                        title="Movie Audience Measurement"
                        subtitle="Source: PirateBay"
                        y-title="Quantitative (MM)"
-                       categories="['Jan', 'Feb', 'Mar', 'Apr', 'May']">
+                       y-Field="value"
+                       display-name="name"
+                       category-field="period">
             </highchart>
         </div>
         <div class="col-md-12">
@@ -38,7 +42,9 @@
                        title="Movie Audience Measurement"
                        subtitle="Source: PirateBay"
                        y-title="Quantitative (MM)"
-                       categories="['Jan', 'Feb', 'Mar', 'Apr', 'May']">
+                       y-Field="value"
+                       display-name="name"
+                       category-field="period">
             </highchart>
         </div>
         <div class="col-md-12">
@@ -46,12 +52,14 @@
                        title="Movie Audience Measurement"
                        subtitle="Source: PirateBay"
                        y-title="Quantitative (MM)"
-                       categories="['Jan', 'Feb', 'Mar', 'Apr', 'May']">
+                       y-Field="value"
+                       display-name="name"
+                       category-field="period">
             </highchart>
         </div>
     </div>
 </div>
-<script src="../dist/ng-highcharts.min.js"></script>
+<script src="../dist/ng-highcharts.js"></script>
 <script src="js/mainController.js"></script>
 </body>
 </html>
