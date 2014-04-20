@@ -1,6 +1,7 @@
 var app = angular.module('mySample', ['ngHighcharts']);
 
 app.controller('mainController', function($scope) {
+
     var data = function() {
         return [{
             name: 'Netflix',
@@ -68,5 +69,6 @@ app.controller('mainController', function($scope) {
             value: 48
         }];
     }
+
     $scope.arr = new data();
 });
