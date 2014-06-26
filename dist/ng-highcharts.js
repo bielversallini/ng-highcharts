@@ -1,6 +1,6 @@
 /**
  * ng-highcharts
- * @version v0.1.0 - 2014-04-15
+ * @version v0.1.0 - 2014-06-25
  * @link https://github.com/bielversallini/ng-highcharts
  * @author Gabriel Barbosa <gabriel@versallini.com.br>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -8,9 +8,9 @@
 (function() {
     'use strict';
     angular.module('ngHighcharts', []);
-    angular.module('ngHighcharts').directive('highchart', function($log, highchart) {
+    angular.module('ngHighcharts').directive('highchart', function(highchart) {
         return {
-            restrict: 'ACE',
+            restrict: 'AE',
             replace: true,
             template: '<div></div>',
             scope: {
@@ -27,6 +27,7 @@
                 var xAxisCategories = [];
                 var series = [];
                 var height = 600;
+                var chartOptions = {};
 
                 if (attrs.type) {
                     type = attrs.type.toLowerCase();
@@ -50,17 +51,14 @@
                     height = eval(attrs.height);
                 }
 
-                var chartOptions = highchart.defaultOptions();
-                if (scope.options) {
-                    chartOptions = scope.options;
-                }
+                angular.extend(chartOptions, highchart.defaultOptions(), scope.options);
+                
                 if (chartOptions) {
                     chartOptions.chart.type = type;
                     chartOptions.title.text = title;
                     chartOptions.subtitle.text = subtitle;
                     chartOptions.xAxis.title.text = xAxisTitle;
                     chartOptions.yAxis.title.text = yAxisTitle;
-                    //chartOptions.xAxis.categories = eval(xAxisCategories);
                     chartOptions.chart.height = height;
                 }
 
@@ -109,7 +107,7 @@
                 return {
                     chart: {
                         animation: true,
-                        type: 'line'
+                        type: ''
                     },
                     title: {
                         text: ''
@@ -127,7 +125,7 @@
                     xAxis: {
                         categories: [],
                         title: {
-                            text: 'sdsadsadsad'
+                            text: ''
                         },
                     },
                     yAxis: {
