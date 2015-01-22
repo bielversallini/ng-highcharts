@@ -53,22 +53,12 @@ module.exports = function(grunt) {
         src: ['<%= co.src %>/<%= pkg.name %>.js'],
         dest: '<%= co.dist %>/<%= pkg.name %>.js'
       }
-    },
-    uglify: {
-      options: {
-        banner: '<%= meta.banner %>'
-      },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: '<%= co.dist %>/<%= pkg.name %>.min.js'
-      }
     }
   });
 
   grunt.registerTask('build', [
     'clean:dist',
     'concat:dist',
-    'uglify:dist'
   ]);
 
   grunt.registerTask('default', ['build']);

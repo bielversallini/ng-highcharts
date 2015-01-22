@@ -1,6 +1,6 @@
 /**
  * ng-highcharts
- * @version v0.1.0 - 2014-06-25
+ * @version v0.1.0 - 2015-01-22
  * @link https://github.com/bielversallini/ng-highcharts
  * @author Gabriel Barbosa <gabriel@versallini.com.br>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -18,85 +18,79 @@
                 options: '='
             },
             link: function(scope, element, attrs) {
-
-                var type = 'line';
-                var title = '';
-                var subtitle = '';
-                var xAxisTitle = '';
-                var yAxisTitle = '';
+                
+                var chartOptions = {};
                 var xAxisCategories = [];
                 var series = [];
-                var height = 600;
-                var chartOptions = {};
 
-                if (attrs.type) {
-                    type = attrs.type.toLowerCase();
-                }
-                if (attrs.title) {
-                    title = attrs.title;
-                }
-                if (attrs.subtitle) {
-                    subtitle = attrs.subtitle;
-                }
-                if (attrs.xTitle) {
-                    xAxisTitle = attrs.xTitle;
-                }
-                if (attrs.yTitle) {
-                    yAxisTitle = attrs.yTitle;
-                }
-                if (attrs.categories) {
+                if (attrs.categories)
                     xAxisCategories = attrs.categories;
-                }
-                if (attrs.height) {
-                    height = eval(attrs.height);
-                }
 
                 angular.extend(chartOptions, highchart.defaultOptions(), scope.options);
-                
                 if (chartOptions) {
-                    chartOptions.chart.type = type;
-                    chartOptions.title.text = title;
-                    chartOptions.subtitle.text = subtitle;
-                    chartOptions.xAxis.title.text = xAxisTitle;
-                    chartOptions.yAxis.title.text = yAxisTitle;
-                    chartOptions.chart.height = height;
+
+                    if (attrs.type)
+                        chartOptions.chart.type = attrs.type.toLowerCase();
+                    if (attrs.title)
+                        chartOptions.title.text = attrs.title;
+                    if (attrs.subtitle)
+                        chartOptions.subtitle.text = attrs.subtitle;
+                    if (attrs.xAxisTitle)
+                        chartOptions.xAxis.title.text = attrs.xAxisTitle;
+                    if (attrs.yAxisTitle)
+                        chartOptions.yAxis.title.text = attrs.yAxisTitle;
+
+                    if (!isNaN(attrs.height))
+                        chartOptions.chart.height = Number(attrs.height);
+
+                    if (!isNaN(attrs.xInterval))
+                        chartOptions.xAxis.tickInterval = Number(attrs.xInterval);
+                    if (!isNaN(attrs.xMin))
+                        chartOptions.xAxis.min = Number(attrs.xMin);
+                    if (!isNaN(attrs.xMax))
+                        chartOptions.xAxis.max = Number(attrs.xMax);
+
+                    if (!isNaN(attrs.yInterval))
+                        chartOptions.yAxis.tickInterval = Number(attrs.yInterval);
+                    if (!isNaN(attrs.yMin))
+                        chartOptions.yAxis.min = Number(attrs.yMin);
+                    if (!isNaN(attrs.yMax))
+                        chartOptions.yAxis.max = Number(attrs.yMax);
+
                 }
 
                 scope.$watch('data', function(val) {
                     var temp = [];
                     for (var i = 0; i < val.length; i++) {
 
-                        // categories
+                        // Building categories
                         var item = val[i][attrs.categoryField];
-                        if (xAxisCategories.length == 0 || xAxisCategories.indexOf(item) < 0) {
+                        if (xAxisCategories.length === 0 || xAxisCategories.indexOf(item) < 0) {
                             xAxisCategories.push(item);
                         }
-
-                        // series
+                        // Building series
                         var obj = {};
-                        obj.name = val[i][attrs.displayName];
+                        obj.name = angular.isDefined(val[i][attrs.displayName]) ? val[i][attrs.displayName] : attrs.displayName;
                         obj.data = [];
-
+                        obj.color = attrs.color;
                         for (var j = 0; j < val.length; j++) {
-                            if (obj.name == val[j][attrs.displayName]) {
-                                var value = val[j][attrs.yField];
+                            if (obj.name === (angular.isDefined(val[j][attrs.displayName]) ? val[j][attrs.displayName] : attrs.displayName)) {
+                                var value = {};
+                                value.y = val[j][attrs.yField];
                                 obj.data.push(value);
                             }
                         }
-
-                        if (series.length == 0 || temp.indexOf(obj.name) < 0) {
+                        if (series.length === 0 || temp.indexOf(obj.name) < 0) {
                             temp.push(obj.name);
                             series.push(obj);
                         }
                     }
-
-                    chartOptions.xAxis.categories = eval(xAxisCategories);
+                    chartOptions.xAxis.categories = xAxisCategories;
                     if (chartOptions && chartOptions.series) {
                         chartOptions.series = series;
                         element.highcharts(chartOptions);
                     }
                 });
-
             }
         }
     });
@@ -107,7 +101,8 @@
                 return {
                     chart: {
                         animation: true,
-                        type: ''
+                        type: 'line',
+                        height: 450
                     },
                     title: {
                         text: ''
@@ -124,17 +119,23 @@
                     series: [],
                     xAxis: {
                         categories: [],
+                        min: null,
+                        max: null,
+                        tickInterval: null,
                         title: {
                             text: ''
                         },
                     },
                     yAxis: {
                         categories: null,
+                        min: null,
+                        max: null,
+                        tickInterval: null,
                         title: {
                             text: ''
                         }
                     }
-                }
+                };
             }
         }
     });
