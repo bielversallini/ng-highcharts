@@ -1,0 +1,20 @@
+{
+  "name": "ng-highcharts",
+  "description": "Angular directive for Highcharts",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "directive",
+    "highcharts"
+  ],
+  "homepage": "https://github.com/bielversallini/ng-highcharts",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "sample",
+    "src"
+  ]
+}
