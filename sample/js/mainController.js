@@ -67,6 +67,17 @@ app.controller('mainController', function($scope) {
             period: 'ABR',
             value: 48
         }];
-    }
+    };
     $scope.arr = new data();
+
+    var count = 0;
+    $scope.displayFunction = function () {
+        count++;
+        return count+ ' ' +this.name;
+    };
+
+    $scope.tootipFunction = function () {
+        var color = "style=\"color: "+this.series.color+"\"";
+        return  "<span "+color+">"+ this.x +"</span><br>"+"<span "+color+">"+this.series.name+": </span> <b>"+this.point.y+"</b>"
+    };
 });
