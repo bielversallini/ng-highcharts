@@ -1,6 +1,6 @@
 /**
  * ng-highcharts
- * @version v0.1.0 - 2015-01-22
+ * @version v0.1.0 - 2016-04-27
  * @link https://github.com/bielversallini/ng-highcharts
  * @author Gabriel Barbosa <gabriel@versallini.com.br>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -15,10 +15,12 @@
             template: '<div></div>',
             scope: {
                 data: '=',
-                options: '='
+                options: '=',
+                legendFormatter: '&',
+                tooltipFormatter: '&'
             },
             link: function(scope, element, attrs) {
-                
+
                 var chartOptions = {};
                 var xAxisCategories = [];
                 var series = [];
@@ -57,6 +59,14 @@
                     if (!isNaN(attrs.yMax))
                         chartOptions.yAxis.max = Number(attrs.yMax);
 
+                    if ('legendFormatter' in attrs) {
+                        chartOptions.legend.labelFormatter = scope.legendFormatter();
+                        delete chartOptions.legend.labelFormat;
+                    }
+
+                    if ('tooltipFormatter' in attrs) {
+                        chartOptions.tooltip.formatter = scope.tooltipFormatter();
+                    }
                 }
 
                 scope.$watch('data', function(val) {
@@ -107,6 +117,9 @@
                     title: {
                         text: ''
                     },
+                    tooltip: {
+
+                    },
                     subtitle: {
                         text: ''
                     },
@@ -124,7 +137,7 @@
                         tickInterval: null,
                         title: {
                             text: ''
-                        },
+                        }
                     },
                     yAxis: {
                         categories: null,
