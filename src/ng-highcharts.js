@@ -8,10 +8,12 @@
             template: '<div></div>',
             scope: {
                 data: '=',
-                options: '='
+                options: '=',
+                legendFormatter: '&',
+                tooltipFormatter: '&'
             },
             link: function(scope, element, attrs) {
-                
+
                 var chartOptions = {};
                 var xAxisCategories = [];
                 var series = [];
@@ -50,6 +52,14 @@
                     if (!isNaN(attrs.yMax))
                         chartOptions.yAxis.max = Number(attrs.yMax);
 
+                    if ('legendFormatter' in attrs) {
+                        chartOptions.legend.labelFormatter = scope.legendFormatter();
+                        delete chartOptions.legend.labelFormat;
+                    }
+
+                    if ('tooltipFormatter' in attrs) {
+                        chartOptions.tooltip.formatter = scope.tooltipFormatter();
+                    }
                 }
 
                 scope.$watch('data', function(val) {
@@ -100,6 +110,9 @@
                     title: {
                         text: ''
                     },
+                    tooltip: {
+
+                    },
                     subtitle: {
                         text: ''
                     },
@@ -117,7 +130,7 @@
                         tickInterval: null,
                         title: {
                             text: ''
-                        },
+                        }
                     },
                     yAxis: {
                         categories: null,
