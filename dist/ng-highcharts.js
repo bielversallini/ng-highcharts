@@ -1,6 +1,6 @@
 /**
  * ng-highcharts
- * @version v0.1.0 - 2016-04-27
+ * @version v0.1.0 - 2016-04-30
  * @link https://github.com/bielversallini/ng-highcharts
  * @author Gabriel Barbosa <gabriel@versallini.com.br>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -69,10 +69,15 @@
                     }
                 }
 
-                scope.$watch('data', function(val) {
+                scope.$watch('data', function(val, old) {
                     var temp = [];
-                    for (var i = 0; i < val.length; i++) {
 
+                    if (old.length > 0) {
+                        xAxisCategories = [];
+                        series = [];
+                    }
+
+                    for (var i = 0; i < val.length; i++) {
                         // Building categories
                         var item = val[i][attrs.categoryField];
                         if (xAxisCategories.length === 0 || xAxisCategories.indexOf(item) < 0) {
@@ -95,11 +100,13 @@
                             series.push(obj);
                         }
                     }
+
                     chartOptions.xAxis.categories = xAxisCategories;
                     if (chartOptions && chartOptions.series) {
                         chartOptions.series = series;
                         element.highcharts(chartOptions);
                     }
+                    
                 });
             }
         }
