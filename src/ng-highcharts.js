@@ -66,7 +66,6 @@
                     var temp = [];
 
                     if (old.length > 0) {
-                        xAxisCategories = [];
                         series = [];
                     }
 
