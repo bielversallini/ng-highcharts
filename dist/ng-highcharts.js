@@ -73,6 +73,7 @@
                     var temp = [];
 
                     if (old.length > 0) {
+                        xAxisCategories = [];
                         series = [];
                     }
 
@@ -92,7 +93,9 @@
                         for (var j = 0; j < val.length; j++) {
                             if (obj.name === (angular.isDefined(val[j][attrs.displayName]) ? val[j][attrs.displayName] : attrs.displayName)) {
                                 var value = {};
+                                value[attrs.categoryField] = val[j][attrs.categoryField];
                                 value.y = val[j][attrs.yField];
+                                value.verify = false;
                                 obj.data.push(value);
                             }
                         }
@@ -103,9 +106,39 @@
                         }
                     }
 
-                    chartOptions.xAxis.categories = xAxisCategories;
+                    if (attrs.multiple) {
+
+                        for (var m = 0; m < xAxisCategories.length; m++) {
+
+                            for (var n = 0; n < series.length; n++) {
+                                var found = false;
+
+                                for (var o = 0; o < series[n].data.length; o++) {
+
+                                    if (angular.equals(series[n].data[o][attrs.categoryField],xAxisCategories[m])){
+                                        found = true;
+                                        series[n].data[o].verify = true;
+                                    }
+
+                                    if (!found && !series[n].data[o].verify) {
+                                        found = true;
+                                        var item = {};
+                                        item[attrs.categoryField] = xAxisCategories[m];
+                                        item.y = null;
+                                        item.verify = true;
+                                        series[n].data.unshift(item);
+                                    } 
+
+                                }
+                                
+                            }
+                        }
+
+                    }
+
+                    chartOptions.xAxis.categories = angular.copy(xAxisCategories);
                     if (chartOptions && chartOptions.series) {
-                        chartOptions.series = series;
+                        chartOptions.series = angular.copy(series);
                         element.highcharts(chartOptions);
                     }
 
