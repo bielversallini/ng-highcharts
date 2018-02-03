@@ -1,4 +1,6 @@
 ## ng-highcharts [![Build Status](https://travis-ci.org/bielversallini/ng-highcharts.svg?branch=master)](https://travis-ci.org/bielversallini/ng-highcharts)
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/bielversallini/ng-highcharts.svg)](https://greenkeeper.io/)
 Angular directive for Highcharts
 
 > **WORK IN PROGRESS!** 
