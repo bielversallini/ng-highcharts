@@ -1,6 +1,6 @@
 /**
  * ng-highcharts
- * @version v0.1.0 - 2016-05-01
+ * @version v0.1.0 - 2021-09-14
  * @link https://github.com/bielversallini/ng-highcharts
  * @author Gabriel Barbosa <gabriel@versallini.com.br>
  * @license MIT License, http://www.opensource.org/licenses/MIT

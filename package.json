@@ -30,6 +30,7 @@
 		"grunt-contrib-uglify": "~3.3.0",
 		"grunt-contrib-watch": "^1.1.0",
 		"jshint-stylish": "~2.2.1",
-		"matchdep": "~2.0.0"
+		"matchdep": "~2.0.0",
+		"trim-newlines": "^4.0.2"
 	}
 }
