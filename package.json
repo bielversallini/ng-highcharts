@@ -31,6 +31,8 @@
 		"grunt-contrib-watch": "^1.1.0",
 		"jshint-stylish": "~2.2.1",
 		"matchdep": "~2.0.0",
+		"meow": "^10.1.1",
+		"set-value": "^4.1.0",
 		"trim-newlines": "^4.0.2"
 	}
 }
